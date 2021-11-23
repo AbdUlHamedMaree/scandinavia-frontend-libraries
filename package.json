@@ -11,9 +11,11 @@
   "dependencies": {
     "@emotion/react": "11.5.0",
     "@emotion/styled": "11.3.0",
+    "axios": "^0.24.0",
     "core-js": "^3.6.5",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-query": "^3.33.4",
     "regenerator-runtime": "0.13.7",
     "tslib": "^2.0.0"
   },
@@ -35,6 +37,7 @@
     "@types/node": "14.14.33",
     "@types/react": "17.0.30",
     "@types/react-dom": "17.0.9",
+    "@types/react-query": "^1.2.9",
     "@typescript-eslint/eslint-plugin": "~4.33.0",
     "@typescript-eslint/parser": "~4.33.0",
     "babel-jest": "27.2.3",

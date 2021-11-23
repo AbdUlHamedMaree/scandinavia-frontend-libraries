@@ -1,0 +1,42 @@
+{
+  "root": "libs/react-query",
+  "sourceRoot": "libs/react-query/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:package",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/react-query",
+        "tsConfig": "libs/react-query/tsconfig.lib.json",
+        "project": "libs/react-query/package.json",
+        "entryFile": "libs/react-query/src/index.ts",
+        "external": ["react/jsx-runtime"],
+        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "assets": [
+          {
+            "glob": "libs/react-query/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/react-query/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/react-query"],
+      "options": {
+        "jestConfig": "libs/react-query/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}
