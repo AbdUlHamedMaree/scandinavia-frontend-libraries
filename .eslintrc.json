@@ -2,10 +2,12 @@
   "root": true,
   "ignorePatterns": ["**/*"],
   "plugins": ["@nrwl/nx"],
+  "extends": ["plugin:prettier/recommended"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
+        "prettier/prettier": [1],
         "@nrwl/nx/enforce-module-boundaries": [
           "error",
           {

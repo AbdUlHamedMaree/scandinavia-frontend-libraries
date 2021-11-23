@@ -7,7 +7,7 @@ export const createReactQueryHelpers: CreateReactQueryHelpers = baseConfig => {
   const config = { ...defaultCreateReactQueryHelpersOptions, ...baseConfig };
 
   return {
-    createMutation: cm(config),
     createQuery: cq(config),
+    createMutation: cm(config),
   };
 };

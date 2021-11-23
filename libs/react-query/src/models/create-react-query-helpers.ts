@@ -1,7 +1,7 @@
 import { AxiosInstance } from 'axios';
 
 import { createMutation as cm } from '../lib/create-mutation';
-import { createQuery as cq } from '../create-query';
+import { createQuery as cq } from '../lib/create-query';
 import { HandlerError } from './handle-error';
 import { Options } from './options';
 

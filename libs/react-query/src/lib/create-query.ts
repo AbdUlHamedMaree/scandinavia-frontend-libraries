@@ -7,12 +7,7 @@ import { one } from '../utils';
 import { AnyObject, QueryKey } from '../types';
 
 export const createQuery =
-  ({
-    handleError,
-    log,
-    toast,
-    axiosInstance,
-  }: Required<CreateReactQueryHelpersConfig>) =>
+  ({ handleError, log, toast, axiosInstance }: Required<CreateReactQueryHelpersConfig>) =>
   <T extends AnyObject = AnyObject>(
     baseKey: QueryKey,
     baseAxiosConfig?: AxiosRequestConfig,
@@ -38,21 +33,11 @@ export const createQuery =
           const err = e as AxiosError<ApiError>;
           if (err?.isAxiosError) {
             if (process.env.NODE_ENV !== 'production') {
-              const logFunc = one(
-                hookOptions?.log,
-                baseOptions?.log,
-                log,
-                defaultLogError
-              );
+              const logFunc = one(hookOptions?.log, baseOptions?.log, log, defaultLogError);
               logFunc && logFunc(err);
             }
 
-            const toastFunc = one(
-              hookOptions?.toast,
-              baseOptions?.toast,
-              toast,
-              defaultToastError
-            );
+            const toastFunc = one(hookOptions?.toast, baseOptions?.toast, toast, defaultToastError);
             toastFunc && toastFunc(err);
 
             throw handleError(err);

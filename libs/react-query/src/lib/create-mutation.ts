@@ -6,19 +6,18 @@ import { defaultLogError, defaultToastError } from '../defaults';
 import { one } from '../utils';
 import { AnyObject, QueryKey } from '../types';
 
-
 export const createMutation =
   ({ handleError, log, toast, axiosInstance }: Required<CreateReactQueryHelpersConfig>) =>
   <T extends AnyObject = AnyObject, K extends AnyObject = AnyObject>(
     baseKey: QueryKey,
     baseAxiosConfig?: Omit<AxiosRequestConfig, 'data'> & { data?: K },
     baseMutationOptions?: UseMutationOptions<T, ApiError, Omit<AxiosRequestConfig, 'data'> & { data?: K }>,
-    baseOptions?: Options,
+    baseOptions?: Options
   ) =>
   (
     hookAxiosConfig?: Omit<AxiosRequestConfig, 'data'> & { data?: K },
     hookMutationOptions?: UseMutationOptions<T, ApiError, Omit<AxiosRequestConfig, 'data'> & { data?: K }>,
-    hookOptions?: Options,
+    hookOptions?: Options
   ) => {
     return useMutation<
       T,
@@ -75,6 +74,6 @@ export const createMutation =
           baseMutationOptions?.onSettled?.(...args);
           hookMutationOptions?.onSettled?.(...args);
         },
-      },
+      }
     );
   };

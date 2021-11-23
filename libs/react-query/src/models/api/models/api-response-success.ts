@@ -1,4 +1,4 @@
-export type ApiResponseSuccess<T = any> = {
+export type ApiResponseSuccess<T = unknown> = {
   data: T;
   count: number;
   total: number;

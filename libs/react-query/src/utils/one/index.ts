@@ -1,4 +1,4 @@
-import { AnyFunction } from "../../types";
+import { AnyFunction } from '../../types';
 
 export const one = (...arr: (AnyFunction | boolean | undefined)[]): AnyFunction | null => {
   return recursionOne(...arr.reverse());

@@ -6,5 +6,5 @@ export type CreateRequest<T> = <K = T>(
   HC?: ARC,
   callbackError?: (error: ApiError) => void,
   callbackSuccess?: (data: K) => void,
-  options?: Options,
+  options?: Options
 ) => Return<K>;

@@ -1,7 +1,7 @@
 import { ApiErrorEnum } from '../../models/api';
 import { HandlerError } from '../../models/handle-error';
 
-export const defaultHandleError: HandlerError = (error) => {
+export const defaultHandleError: HandlerError = error => {
   let toThrow = {};
   if (error.response)
     toThrow = {
