@@ -1,4 +1,24 @@
 {
   "name": "@scandinavia/react-query",
-  "version": "0.0.1"
+  "version": "0.0.3",
+  "description": "A wrapper for react-query package, by adding more flexible and functionality",
+  "keywords": [
+    "front-end",
+    "react-query",
+    "hooks",
+    "axios",
+    "react"
+  ],
+  "homepage": "https://github.com/AbdUlHamedMaree/scandinavia-frontend-libraries/tree/main/libs/react-query",
+  "license": "MIT",
+  "author": {
+    "name": "Abd Ul-Hameed Maree",
+    "email": "hmidmrii@gmail.com",
+    "url": "https://www.linkedin.com/in/abd-ul-hameed-maree/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AbdUlHamedMaree/scandinavia-frontend-libraries.git",
+    "directory": "main/libs/react-query"
+  }
 }

@@ -6,7 +6,7 @@
 
 implement it in your libs folder:
 
-```typescript
+```ts
 // libs/react-query
 
 import axios from 'axios';
@@ -35,7 +35,7 @@ export const queryClient = new QueryClient();
 
 now you can use it in your services:
 
-```typescript
+```ts
 // services/books
 
 import { createQuery, createMutation, queryClient } from '../libs';
