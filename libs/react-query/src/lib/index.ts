@@ -1,6 +1,6 @@
 import { createMutation as cm } from './create-mutation';
 import { createQuery as cq } from './create-query';
-import { CreateReactQueryHelpers } from '../models';
+import { CreateReactQueryHelpers } from '../types';
 import { defaultCreateReactQueryHelpersOptions } from '../defaults';
 
 export const createReactQueryHelpers: CreateReactQueryHelpers = (baseConfig = {}) => {

@@ -1,4 +1,4 @@
-import { Options } from '../../models';
+import { Options } from '../../types';
 import { defaultCreateReactQueryHelpersOptions } from '../create-react-query-helpers-options';
 
 export const defaultOptions: Options = {

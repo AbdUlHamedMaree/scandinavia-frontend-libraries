@@ -1,4 +1,4 @@
-import { ToastError } from '../../models/toast-error';
+import { ToastError } from '../../types/toast-error';
 
 export const defaultToastError: ToastError = error => {
   let mes = 'error in request';

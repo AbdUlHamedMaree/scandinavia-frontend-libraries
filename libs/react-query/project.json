@@ -8,6 +8,7 @@
       "executor": "@nrwl/web:package",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "format": ["esm"],
         "outputPath": "dist/libs/react-query",
         "tsConfig": "libs/react-query/tsconfig.lib.json",
         "project": "libs/react-query/package.json",

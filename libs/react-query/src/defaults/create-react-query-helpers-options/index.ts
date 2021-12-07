@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CreateReactQueryHelpersConfig } from '../../models';
+import { CreateReactQueryHelpersConfig } from '../../types';
 import { defaultHandleError } from '../handle-error';
 import { defaultLogError } from '../log-error';
 import { defaultToastError } from '../toast-error';

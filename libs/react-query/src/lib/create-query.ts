@@ -2,7 +2,7 @@ import { AxiosError, AxiosRequestConfig } from 'axios';
 import { useQuery, UseQueryOptions } from 'react-query';
 
 import { defaultHandleError, defaultLogError, defaultToastError } from '../defaults';
-import { CreateReactQueryHelpersConfig, Options, ApiError } from '../models';
+import { CreateReactQueryHelpersConfig, Options, ApiError } from '../types';
 import { one, resolveError } from '../utils';
 import { AnyObject, QueryKey } from '../types';
 

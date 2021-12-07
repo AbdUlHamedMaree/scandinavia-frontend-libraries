@@ -1,7 +1,7 @@
 import { useMutation, UseMutationOptions } from 'react-query';
 import { AxiosError, AxiosRequestConfig } from 'axios';
 
-import { CreateReactQueryHelpersConfig, Options, ApiError } from '../models';
+import { CreateReactQueryHelpersConfig, Options, ApiError } from '../types';
 import { defaultHandleError, defaultLogError, defaultToastError } from '../defaults';
 import { one, resolveError } from '../utils';
 import { AnyObject, QueryKey } from '../types';

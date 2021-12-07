@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { ApiError } from '../../models';
+import { ApiError } from '../types';
 
 export const resolveError = (error: AxiosError) => {
   let toThrow: ApiError;

@@ -1,4 +1,4 @@
-import { LogError } from '../../models/log-error';
+import { LogError } from '../../types/log-error';
 import { logError } from '../../utils';
 
 export const defaultLogError: LogError = error => {
