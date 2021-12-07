@@ -1,6 +1,6 @@
 {
   "name": "@scandinavia/react-query",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A wrapper for react-query package, by adding more flexible and functionality",
   "keywords": [
     "front-end",
