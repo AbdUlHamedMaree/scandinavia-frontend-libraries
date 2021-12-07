@@ -15,8 +15,9 @@ type MyFancyButtonProps = {
 };
 
 /* Old Way 🤕
- * you have to keep in your mind the various properties
- * and how they should react if the same property come the end-developer.
+ * you have to keep in mind the various properties
+ * and how they should react if the same property came from
+ * the end-developer.
  */
 const MyFancyButton: React.FC<MyFancyButtonProps> = props => {
   return (
@@ -32,7 +33,8 @@ const MyFancyButton: React.FC<MyFancyButtonProps> = props => {
 };
 
 /* With `deep-merge` 😍
- * it's just merging two objects and return the result.
+ * it's just merging two objects and return the result
+ * no matter how the end-developer provide it.
  */
 
 const MyFancyButton: React.FC<MyFancyButtonProps> = props => {
@@ -57,4 +59,11 @@ import { createDeepMerge } from '@scandinavia/deep-merge';
 const myDeepMerge = createDeepMerge({ overrideFunctions: true });
 
 // use `myDeepMerge` in your code.
+```
+
+## **_Powerful Typing_**
+
+```ts
+const result = deepMerge({ a: 'str' }, { a: 1, b: 'str' });
+//      '------> type of { a:string | number, b?:string | undefined }
 ```

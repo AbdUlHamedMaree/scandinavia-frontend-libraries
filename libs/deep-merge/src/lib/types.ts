@@ -10,5 +10,5 @@ export type PickType<T, K extends AllKeys<T>> = T extends { [k in K]?: any } ? T
 export type PickTypeOf<T, K extends string | number | symbol> = K extends AllKeys<T> ? PickType<T, K> : never;
 
 export type MergeUnion<T extends object> = {
-  [k in AllKeys<T>]: PickTypeOf<T, k>;
+  [K in AllKeys<T>]: PickTypeOf<T, K>;
 };
