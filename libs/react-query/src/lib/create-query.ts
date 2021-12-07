@@ -1,9 +1,9 @@
 import { AxiosError, AxiosRequestConfig } from 'axios';
 import { useQuery, UseQueryOptions } from 'react-query';
 
-import { defaultLogError, defaultToastError } from '../defaults';
+import { defaultHandleError, defaultLogError, defaultToastError } from '../defaults';
 import { CreateReactQueryHelpersConfig, Options, ApiError } from '../models';
-import { one } from '../utils';
+import { one, resolveError } from '../utils';
 import { AnyObject, QueryKey } from '../types';
 
 export const createQuery =
@@ -30,8 +30,8 @@ export const createQuery =
 
           return data;
         } catch (e) {
-          const err = e as AxiosError<ApiError>;
-          if (err?.isAxiosError) {
+          if ((e as AxiosError)?.isAxiosError) {
+            const err = resolveError(e as AxiosError);
             if (process.env.NODE_ENV !== 'production') {
               const logFunc = one(hookOptions?.log, baseOptions?.log, log, defaultLogError);
               logFunc && logFunc(err);
@@ -40,7 +40,8 @@ export const createQuery =
             const toastFunc = one(hookOptions?.toast, baseOptions?.toast, toast, defaultToastError);
             toastFunc && toastFunc(err);
 
-            throw handleError(err);
+            const handleErrorFunc = one(handleError, defaultHandleError);
+            throw handleErrorFunc && handleErrorFunc(err);
           } else throw e;
         }
       },

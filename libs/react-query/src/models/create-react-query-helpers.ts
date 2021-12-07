@@ -10,7 +10,7 @@ export type CreateReactQueryHelpersConfig = {
   handleError?: HandlerError;
 } & Options;
 
-export type CreateReactQueryHelpers = (config: CreateReactQueryHelpersConfig) => {
+export type CreateReactQueryHelpers = (config?: CreateReactQueryHelpersConfig) => {
   createMutation: ReturnType<typeof cm>;
   createQuery: ReturnType<typeof cq>;
 };

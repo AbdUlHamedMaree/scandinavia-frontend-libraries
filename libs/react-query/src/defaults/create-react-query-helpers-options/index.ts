@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { CreateReactQueryHelpersConfig } from '../../models';
-import { defaultLogError } from '../handle-error';
-import { defaultHandleError } from '../log-error';
+import { defaultHandleError } from '../handle-error';
+import { defaultLogError } from '../log-error';
 import { defaultToastError } from '../toast-error';
 
 export const defaultCreateReactQueryHelpersOptions: Required<CreateReactQueryHelpersConfig> = {

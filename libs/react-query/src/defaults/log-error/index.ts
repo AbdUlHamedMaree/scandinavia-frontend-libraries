@@ -1,18 +1,18 @@
-import { ApiErrorEnum } from '../../models/api';
-import { HandlerError } from '../../models/handle-error';
+import { LogError } from '../../models/log-error';
+import { logError } from '../../utils';
 
-export const defaultHandleError: HandlerError = error => {
-  let toThrow = {};
-  if (error.response)
-    toThrow = {
-      ...error.response.data,
-      errorType: ApiErrorEnum.response,
-    };
+export const defaultLogError: LogError = error => {
+  let logs = { title: '', body: {} };
+  if (error.response) logs = { title: 'received response', body: error.response };
   else if (error.request)
-    toThrow = {
-      request: error.request,
-      errorType: ApiErrorEnum.request,
+    logs = {
+      title: 'WITH NO RESPONSE, the request',
+      body: error.request,
     };
-  else toThrow = { ...error, errorType: ApiErrorEnum.unknown };
-  return toThrow;
+  else
+    logs = {
+      title: 'unhandled error happened, the message form axios request',
+      body: error.message,
+    };
+  logError(logs.title + '\n', JSON.stringify(logs.body, null, 2));
 };

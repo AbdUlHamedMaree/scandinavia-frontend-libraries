@@ -1,4 +1,3 @@
-import { AxiosError } from 'axios';
-import { ApiError } from './api';
+import { ApiError } from './api-error';
 
-export type ToastError = (error: AxiosError<ApiError>) => void;
+export type ToastError = (error: ApiError) => void;

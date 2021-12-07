@@ -1,10 +1,10 @@
-import { AnyFunction } from '../../types';
+/* eslint-disable @typescript-eslint/ban-types */
 
-export const one = (...arr: (AnyFunction | boolean | undefined)[]): AnyFunction | null => {
+export const one = <T extends Function>(...arr: (T | boolean | undefined)[]): T | null => {
   return recursionOne(...arr.reverse());
 };
 
-const recursionOne = (...arr: (AnyFunction | boolean | undefined)[]): AnyFunction | null => {
+const recursionOne = <T extends Function>(...arr: (T | boolean | undefined)[]): T | null => {
   if (!arr.length) return null;
   const target = arr.pop();
   if (typeof target === 'function') return target;

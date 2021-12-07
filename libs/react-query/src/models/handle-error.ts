@@ -1,4 +1,3 @@
-import { AxiosError } from 'axios';
-import { ApiError } from './api';
+import { ApiError } from './api-error';
 
-export type HandlerError = (error: AxiosError<ApiError>) => unknown;
+export type HandlerError = (error: ApiError) => unknown;

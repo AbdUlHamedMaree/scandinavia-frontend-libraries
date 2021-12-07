@@ -1,7 +1,7 @@
-export * from './api';
-
+export * from './api-error';
 export * from './create-react-query-helpers';
 export * from './create-request';
+export * from './error-type-union';
 export * from './handle-error';
 export * from './log-error';
 export * from './options';
