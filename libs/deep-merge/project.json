@@ -1,0 +1,33 @@
+{
+  "root": "libs/deep-merge",
+  "sourceRoot": "libs/deep-merge/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/workspace:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/deep-merge",
+        "main": "libs/deep-merge/src/index.ts",
+        "tsConfig": "libs/deep-merge/tsconfig.lib.json",
+        "assets": ["libs/deep-merge/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/deep-merge/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/deep-merge"],
+      "options": {
+        "jestConfig": "libs/deep-merge/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
