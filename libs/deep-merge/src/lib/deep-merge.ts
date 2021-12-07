@@ -23,7 +23,7 @@ const permeative = ['string', 'number', 'bigint', 'boolean', 'symbol'];
 
 export const createDeepMerge =
   (options: Partial<Options>) =>
-  <T extends Record<string, unknown> | undefined>(...args: T[]): MergeUnion<Exclude<T, undefined>> =>
+  <T extends object | undefined>(...args: T[]): MergeUnion<Exclude<T, undefined>> =>
     args.reduce((a, b) => deepMergeTwo(a, b, { ...defaultOptions, ...options }), {} as any);
 
 export const deepMerge = createDeepMerge(defaultOptions);
