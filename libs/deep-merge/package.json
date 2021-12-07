@@ -1,4 +1,28 @@
 {
   "name": "@scandinavia/deep-merge",
-  "version": "0.0.1"
+  "version": "0.0.2",
+  "description": "merge multiple objects with no time",
+  "keywords": [
+    "front-end",
+    "back-end",
+    "react",
+    "utils",
+    "utility",
+    "merge-objects",
+    "merge",
+    "deep-merge",
+    "deepmerge"
+  ],
+  "homepage": "https://github.com/AbdUlHamedMaree/scandinavia-frontend-libraries/tree/main/libs/deep-merge",
+  "license": "MIT",
+  "author": {
+    "name": "Abd Ul-Hameed Maree",
+    "email": "hmidmrii@gmail.com",
+    "url": "https://www.linkedin.com/in/abd-ul-hameed-maree/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AbdUlHamedMaree/scandinavia-frontend-libraries.git",
+    "directory": "libs/deep-merge"
+  }
 }

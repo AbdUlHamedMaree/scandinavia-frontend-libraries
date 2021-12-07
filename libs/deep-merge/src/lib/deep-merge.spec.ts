@@ -59,6 +59,25 @@ it('deep-merge test, expect merge two student successfully', () => {
   expect(deepMerge(a, b)).toEqual(toGet);
 });
 
+it('deep-merge test, expect merge {} with obj to be obj', () => {
+  const aDate = new Date('1995-12-17T03:24:00');
+  const a = {};
+  const b: Student = {
+    name: 'John',
+    images: ['1'],
+    isDead: true,
+    profile: {
+      BirthDate: aDate,
+      married: false,
+    },
+    certs: [{ name: '1', year: aDate }],
+    a: 'a',
+  };
+
+  const toGet = b;
+  expect(deepMerge(a, b)).toEqual(toGet);
+});
+
 it('deep-merge test, expect merge object with undefined to be defined', () => {
   const aDate = new Date('1995-12-17T03:24:00');
   const a: Student = {
