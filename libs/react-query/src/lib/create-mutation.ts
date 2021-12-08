@@ -10,7 +10,7 @@ export const createMutation =
   ({ handleError, log, toast, axiosInstance }: Required<CreateReactQueryHelpersConfig>) =>
   <T extends AnyObject = AnyObject, K extends AnyObject = AnyObject>(
     baseKey: QueryKey,
-    baseAxiosConfig?: Omit<AxiosRequestConfig, 'data'> & { data?: K },
+    baseAxiosConfig?: (Omit<AxiosRequestConfig, 'data'> & { data?: K }) | Promise<T>,
     baseMutationOptions?: UseMutationOptions<T, ApiError, Omit<AxiosRequestConfig, 'data'> & { data?: K }>,
     baseOptions?: Options
   ) =>
@@ -30,16 +30,20 @@ export const createMutation =
       baseKey,
       async ({ setUrl, ...config }) => {
         try {
-          const url = config.url ?? hookAxiosConfig?.url ?? baseAxiosConfig?.url ?? '';
+          if (baseAxiosConfig instanceof Promise) {
+            return await baseAxiosConfig;
+          } else {
+            const url = config.url ?? hookAxiosConfig?.url ?? baseAxiosConfig?.url ?? '';
 
-          const { data } = await axiosInstance.request<T>({
-            ...baseAxiosConfig,
-            ...hookAxiosConfig,
-            ...config,
-            url: setUrl ? setUrl(url) : url,
-          });
-
-          return data;
+            return (
+              await axiosInstance.request<T>({
+                ...baseAxiosConfig,
+                ...hookAxiosConfig,
+                ...config,
+                url: setUrl ? setUrl(url) : url,
+              })
+            ).data;
+          }
         } catch (e) {
           if ((e as AxiosError)?.isAxiosError) {
             const err = resolveError(e as AxiosError);

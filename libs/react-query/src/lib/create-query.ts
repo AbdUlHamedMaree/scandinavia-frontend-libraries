@@ -10,7 +10,7 @@ export const createQuery =
   ({ handleError, log, toast, axiosInstance }: Required<CreateReactQueryHelpersConfig>) =>
   <T extends AnyObject = AnyObject>(
     baseKey: QueryKey,
-    baseAxiosConfig?: AxiosRequestConfig,
+    baseAxiosConfig?: AxiosRequestConfig | Promise<T>,
     baseQueryOptions?: UseQueryOptions<T, ApiError, T, QueryKey>,
     baseOptions?: Options
   ) =>
@@ -23,12 +23,16 @@ export const createQuery =
       baseKey,
       async () => {
         try {
-          const { data } = await axiosInstance.request<T>({
-            ...baseAxiosConfig,
-            ...hookAxiosConfig,
-          });
-
-          return data;
+          if (baseAxiosConfig instanceof Promise) {
+            return await baseAxiosConfig;
+          } else {
+            return (
+              await axiosInstance.request<T>({
+                ...baseAxiosConfig,
+                ...hookAxiosConfig,
+              })
+            ).data;
+          }
         } catch (e) {
           if ((e as AxiosError)?.isAxiosError) {
             const err = resolveError(e as AxiosError);
