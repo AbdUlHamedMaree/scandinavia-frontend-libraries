@@ -1,0 +1,33 @@
+{
+  "root": "libs/mock",
+  "sourceRoot": "libs/mock/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/workspace:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/mock",
+        "main": "libs/mock/src/index.ts",
+        "tsConfig": "libs/mock/tsconfig.lib.json",
+        "assets": ["libs/mock/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/mock/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/mock"],
+      "options": {
+        "jestConfig": "libs/mock/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

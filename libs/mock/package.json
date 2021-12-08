@@ -1,0 +1,29 @@
+{
+  "name": "@scancinavia/mock",
+  "version": "0.0.3",
+  "description": "A simple package to mock data when the backend is busy.",
+  "keywords": [
+    "front-end",
+    "back-end",
+    "react",
+    "utils",
+    "utility",
+    "mock",
+    "mock-data",
+    "lorem",
+    "ipsum"
+  ],
+  "homepage": "https://github.com/AbdUlHamedMaree/scandinavia-frontend-libraries/tree/main/libs/mock",
+  "license": "MIT",
+  "author": {
+    "name": "Abd Ul-Hameed Maree",
+    "email": "hmidmrii@gmail.com",
+    "url": "https://www.linkedin.com/in/abd-ul-hameed-maree/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AbdUlHamedMaree/scandinavia-frontend-libraries.git",
+    "directory": "libs/mock"
+  }
+
+}

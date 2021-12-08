@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "deep-merge": "libs/deep-merge",
+    "mock": "libs/mock",
     "react-query": "libs/react-query"
   }
 }

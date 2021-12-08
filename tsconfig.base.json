@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@scancinavia/mock": ["libs/mock/src/index.ts"],
       "@scandinavia/deep-merge": ["libs/deep-merge/src/index.ts"],
       "@scandinavia/react-query": ["libs/react-query/src/index.ts"]
     }
