@@ -56,7 +56,7 @@ if you don't want to merge the functions (just override the function) you can im
 
 ```ts
 import { createDeepMerge } from '@scandinavia/deep-merge';
-const myDeepMerge = createDeepMerge({ overrideFunctions: true });
+const myDeepMerge = createDeepMerge({ shouldOverrideFunction: () => true });
 
 // use `myDeepMerge` in your code.
 ```

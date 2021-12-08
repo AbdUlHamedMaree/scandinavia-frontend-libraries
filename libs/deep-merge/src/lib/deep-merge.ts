@@ -1,13 +1,13 @@
 import { MergeUnion } from './types';
 
 type Options = {
-  overrideFunctions: boolean;
+  shouldOverrideFunction: (key: string, source: Function, destination: Function) => boolean;
   shouldOverrideObject: (key: string, source: object, destination: object) => boolean;
   shouldOverrideArray: (key: string, source: any[], destination: any[]) => boolean;
 };
 
 const defaultOptions: Options = {
-  overrideFunctions: false,
+  shouldOverrideFunction: () => false,
   shouldOverrideObject: () => false,
   shouldOverrideArray: () => false,
 };
@@ -18,7 +18,7 @@ const isArray = (f: unknown): f is unknown[] => Array.isArray(f);
 
 const defined = <T>(f: T): f is Exclude<T, undefined> => typeof f !== 'undefined';
 
-export const mergeFunctions =
+const mergeFunctions =
   <F extends ((...args: any[]) => any) | undefined>(...funcs: F[]) =>
   (...args: F extends Function ? Parameters<F> : never): F extends Function ? ReturnType<F> : never => {
     return funcs
@@ -30,11 +30,11 @@ export const mergeFunctions =
   };
 
 export const createDeepMerge =
-  (options: Partial<Options>) =>
+  (options: Partial<Options> = {}) =>
   <T extends object | undefined>(...args: T[]): MergeUnion<Exclude<T, undefined>> =>
     args.reduce((a, b) => deepMergeTwo(a, b, { ...defaultOptions, ...options }), {} as any);
 
-export const deepMerge = createDeepMerge(defaultOptions);
+export const deepMerge = createDeepMerge();
 
 const deepMergeTwo = (a: any, b: any, options: Options) => {
   defined(b) &&
@@ -48,7 +48,7 @@ const deepMergeTwo = (a: any, b: any, options: Options) => {
         else if (isArray(b[k]))
           a[k] = isArray(a[k]) && !options.shouldOverrideArray(k, a[k], b[k]) ? [...a[k], ...b[k]] : b[k];
         else if (isFunction(b[k]))
-          a[k] = isFunction(a[k]) && options.overrideFunctions ? mergeFunctions(a[k], b[k]) : b[k];
+          a[k] = isFunction(a[k]) && !options.shouldOverrideFunction(k, a[k], b[k]) ? mergeFunctions(a[k], b[k]) : b[k];
         else a[k] = b[k];
       }
     });
