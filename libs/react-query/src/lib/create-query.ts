@@ -4,11 +4,11 @@ import { useQuery, UseQueryOptions } from 'react-query';
 import { defaultHandleError, defaultLogError, defaultToastError } from '../defaults';
 import { CreateReactQueryHelpersConfig, Options, ApiError } from '../types';
 import { one, resolveError } from '../utils';
-import { AnyObject, QueryKey } from '../types';
+import { QueryKey } from '../types';
 
 export const createQuery =
   ({ handleError, log, toast, axiosInstance }: Required<CreateReactQueryHelpersConfig>) =>
-  <T extends AnyObject = AnyObject>(
+  <T = unknown>(
     baseKey: QueryKey,
     baseAxiosConfig?: AxiosRequestConfig | Promise<T>,
     baseQueryOptions?: UseQueryOptions<T, ApiError, T, QueryKey>,
