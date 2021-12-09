@@ -8,9 +8,9 @@ import { QueryKey } from '../types';
 
 export const createMutation =
   ({ handleError, log, toast, axiosInstance }: Required<CreateReactQueryHelpersConfig>) =>
-  <T = unknown, K = unknown>(
+  <T = unknown, K = unknown, TConfig = (Omit<AxiosRequestConfig, 'data'> & { data?: K }) | ((arg: K) => Promise<T>)>(
     baseKey: QueryKey,
-    baseAxiosConfig?: (Omit<AxiosRequestConfig, 'data'> & { data?: K }) | Promise<T>,
+    baseAxiosConfig?: TConfig,
     baseMutationOptions?: UseMutationOptions<T, ApiError, Omit<AxiosRequestConfig, 'data'> & { data?: K }>,
     baseOptions?: Options
   ) =>
@@ -22,18 +22,28 @@ export const createMutation =
     return useMutation<
       T,
       ApiError,
-      Omit<AxiosRequestConfig, 'data'> & {
-        data?: K;
-        setUrl?: (url: string) => string;
-      }
+      TConfig extends (arg: K) => Promise<T>
+        ? K
+        : Omit<AxiosRequestConfig, 'data'> & {
+            data?: K;
+            setUrl?: (url: string) => string;
+          }
     >(
       baseKey,
-      async ({ setUrl, ...config }) => {
+      async arg => {
         try {
-          if (baseAxiosConfig instanceof Promise) {
-            return await baseAxiosConfig;
+          if (baseAxiosConfig instanceof Function) {
+            return await baseAxiosConfig(arg);
           } else {
-            const url = config.url ?? hookAxiosConfig?.url ?? baseAxiosConfig?.url ?? '';
+            const { setUrl, ...config } = arg as Omit<AxiosRequestConfig, 'data'> & {
+              data?: K;
+              setUrl?: (url: string) => string;
+            };
+            const url =
+              config.url ??
+              hookAxiosConfig?.url ??
+              (baseAxiosConfig as Omit<AxiosRequestConfig, 'data'> & { data?: K })?.url ??
+              '';
 
             return (
               await axiosInstance.request<T>({
