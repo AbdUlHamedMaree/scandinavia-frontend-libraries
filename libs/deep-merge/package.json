@@ -1,6 +1,7 @@
 {
   "name": "@scandinavia/deep-merge",
   "version": "0.0.5",
+  "private":false,
   "description": "merge multiple objects with no time",
   "keywords": [
     "front-end",
