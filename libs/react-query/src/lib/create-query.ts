@@ -1,5 +1,5 @@
 import { AxiosError, AxiosRequestConfig } from 'axios';
-import { useQuery, UseQueryOptions } from 'react-query';
+import { QueryFunction, useQuery, UseQueryOptions } from 'react-query';
 
 import { defaultHandleError, defaultLogError, defaultToastError } from '../defaults';
 import { CreateReactQueryHelpersConfig, Options, ApiError } from '../types';
@@ -10,7 +10,7 @@ export const createQuery =
   ({ handleError, log, toast, axiosInstance }: Required<CreateReactQueryHelpersConfig>) =>
   <T = unknown>(
     baseKey: QueryKey,
-    baseAxiosConfig?: AxiosRequestConfig | Promise<T>,
+    baseAxiosConfig?: AxiosRequestConfig | QueryFunction<T, QueryKey>,
     baseQueryOptions?: UseQueryOptions<T, ApiError, T, QueryKey>,
     baseOptions?: Options
   ) =>
@@ -21,10 +21,10 @@ export const createQuery =
   ) =>
     useQuery<T, ApiError, T, QueryKey>(
       baseKey,
-      async () => {
+      async ctx => {
         try {
-          if (baseAxiosConfig instanceof Promise) {
-            return await baseAxiosConfig;
+          if (baseAxiosConfig instanceof Function) {
+            return await baseAxiosConfig(ctx);
           } else {
             return (
               await axiosInstance.request<T>({
@@ -45,7 +45,7 @@ export const createQuery =
             toastFunc && toastFunc(err);
 
             const handleErrorFunc = one(handleError, defaultHandleError);
-            throw handleErrorFunc && handleErrorFunc(err);
+            throw handleErrorFunc?.(err);
           } else throw e;
         }
       },

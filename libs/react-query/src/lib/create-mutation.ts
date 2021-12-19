@@ -1,4 +1,4 @@
-import { useMutation, UseMutationOptions } from 'react-query';
+import { MutationFunction, useMutation, UseMutationOptions } from 'react-query';
 import { AxiosError, AxiosRequestConfig } from 'axios';
 
 import { CreateReactQueryHelpersConfig, Options, ApiError } from '../types';
@@ -8,7 +8,7 @@ import { QueryKey } from '../types';
 
 export const createMutation =
   ({ handleError, log, toast, axiosInstance }: Required<CreateReactQueryHelpersConfig>) =>
-  <T = unknown, K = unknown, TConfig = (Omit<AxiosRequestConfig, 'data'> & { data?: K }) | ((arg: K) => Promise<T>)>(
+  <T = unknown, K = unknown, TConfig = (Omit<AxiosRequestConfig, 'data'> & { data?: K }) | MutationFunction<T, K>>(
     baseKey: QueryKey,
     baseAxiosConfig?: TConfig,
     baseMutationOptions?: UseMutationOptions<T, ApiError, Omit<AxiosRequestConfig, 'data'> & { data?: K }>,

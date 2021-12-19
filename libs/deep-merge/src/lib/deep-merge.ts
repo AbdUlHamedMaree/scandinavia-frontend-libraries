@@ -12,9 +12,9 @@ const defaultOptions: Options = {
   shouldOverrideArray: () => false,
 };
 
-const isFunction = (f: unknown): f is Function => typeof f === 'function';
-const isSafeObject = (f: unknown): f is object => typeof f === 'object' && f !== null;
-const isArray = (f: unknown): f is unknown[] => Array.isArray(f);
+const isFunction = (arg: unknown): arg is Function => typeof arg === 'function';
+const isSafeObject = (arg: unknown): arg is object => typeof arg === 'object' && arg !== null;
+const isArray = (arg: unknown): arg is unknown[] => Array.isArray(arg);
 
 const defined = <T>(f: T): f is Exclude<T, undefined> => typeof f !== 'undefined';
 
