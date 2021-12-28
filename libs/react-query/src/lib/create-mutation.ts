@@ -1,56 +1,51 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { MutationFunction, useMutation, UseMutationOptions } from 'react-query';
-import { AxiosError, AxiosRequestConfig } from 'axios';
+import { AxiosError, AxiosRequestConfig as _AxiosRequestConfig } from 'axios';
 
 import { CreateReactQueryHelpersConfig, Options, ApiError } from '../types';
 import { defaultHandleError, defaultLogError, defaultToastError } from '../defaults';
 import { one, resolveError } from '../utils';
 import { QueryKey } from '../types';
+import { replaceQuery } from '../utils/replace-query';
+
+export type AxiosRequestConfig<D = any> = _AxiosRequestConfig<D> & {
+  query?: Record<string, string>;
+};
 
 export const createMutation =
   ({ handleError, log, toast, axiosInstance }: Required<CreateReactQueryHelpersConfig>) =>
-  <T = unknown, K = unknown, TConfig = (Omit<AxiosRequestConfig, 'data'> & { data?: K }) | MutationFunction<T, K>>(
+  <
+    T = unknown,
+    K = unknown,
+    TConfig = AxiosRequestConfig<K> | MutationFunction<T, K>,
+    TOpt = TConfig extends MutationFunction<T, K> ? K : AxiosRequestConfig<K>
+  >(
     baseKey: QueryKey,
     baseAxiosConfig?: TConfig,
-    baseMutationOptions?: UseMutationOptions<T, ApiError, Omit<AxiosRequestConfig, 'data'> & { data?: K }>,
+    baseMutationOptions?: UseMutationOptions<T, ApiError, TOpt>,
     baseOptions?: Options
   ) =>
   (
-    hookAxiosConfig?: Omit<AxiosRequestConfig, 'data'> & { data?: K },
-    hookMutationOptions?: UseMutationOptions<T, ApiError, Omit<AxiosRequestConfig, 'data'> & { data?: K }>,
+    hookAxiosConfig?: AxiosRequestConfig<K>,
+    hookMutationOptions?: UseMutationOptions<T, ApiError, TOpt>,
     hookOptions?: Options
   ) => {
-    return useMutation<
-      T,
-      ApiError,
-      TConfig extends (arg: K) => Promise<T>
-        ? K
-        : Omit<AxiosRequestConfig, 'data'> & {
-            data?: K;
-            setUrl?: (url: string) => string;
-          }
-    >(
+    return useMutation<T, ApiError, TOpt>(
       baseKey,
       async arg => {
         try {
           if (baseAxiosConfig instanceof Function) {
             return await baseAxiosConfig(arg);
           } else {
-            const { setUrl, ...config } = arg as Omit<AxiosRequestConfig, 'data'> & {
-              data?: K;
-              setUrl?: (url: string) => string;
-            };
-            const url =
-              config.url ??
-              hookAxiosConfig?.url ??
-              (baseAxiosConfig as Omit<AxiosRequestConfig, 'data'> & { data?: K })?.url ??
-              '';
-
+            const config = arg as unknown as AxiosRequestConfig<K>;
             return (
               await axiosInstance.request<T>({
                 ...baseAxiosConfig,
                 ...hookAxiosConfig,
                 ...config,
-                url: setUrl ? setUrl(url) : url,
+                url: replaceQuery(config.url ?? hookAxiosConfig?.url ?? (baseAxiosConfig as any)?.url)(
+                  config.query ?? hookAxiosConfig?.query ?? (baseAxiosConfig as any)?.query
+                ),
               })
             ).data;
           }
