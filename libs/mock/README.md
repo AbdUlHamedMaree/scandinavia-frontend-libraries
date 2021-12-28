@@ -5,7 +5,7 @@ A simple package to mock data where is your backend is busy.
 ## Usage
 
 ```ts
-import * as mock from '@scandinavia/mock'
+import * as mock from '@scandinavia/mock';
 
 // first name.
 const randomMaleFirstName = mock.firstname('male');

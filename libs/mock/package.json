@@ -1,7 +1,7 @@
 {
   "name": "@scandinavia/mock",
   "version": "0.0.3",
-  "private":false,
+  "private": false,
   "description": "A simple package to mock data when the backend is busy.",
   "keywords": [
     "front-end",
@@ -26,5 +26,4 @@
     "url": "https://github.com/AbdUlHamedMaree/scandinavia-frontend-libraries.git",
     "directory": "libs/mock"
   }
-
 }
